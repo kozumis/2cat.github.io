@@ -1,0 +1,733 @@
+:root {
+    --bg-color: #F0F0E0; /* Very light, off-white background */
+    --text-color: #333333; /* Dark grey text */
+    --header-bg: #800000; /* Darker red for header */
+    --header-text: #FFDCDC; /* Light red for header text */
+    --main-bg: #FFFFFF; /* White for the main content area */
+    --border-color: #A00000; /* Deep red for borders */
+    --form-bg: #F8F8F0; /* Slightly off-white for form background */
+    --input-bg: #FFFFFF; /* White for input fields */
+    --button-bg: #CC0000; /* Standard red for buttons */
+    --button-hover-bg: #AA0000; /* Darker red on hover */
+    --post-bg: #F8F8F0; /* Same as form background for posts */
+    --post-border: #E0E0E0; /* Very light grey border for posts */
+    --timestamp-color: #777777; /* Neutral grey for timestamp */
+    --delete-button-bg: #CC0000; /* Red for delete button */
+    --call-board-bg: #FFF5F5; /* Lighter red tint for call boards */
+    --call-border: #B00000; /* Slightly darker red for call board border */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--header-bg);
+    width: 100%;
+    text-align: left; /* Aligned left for 4chan-like header */
+    padding: 10px 20px;
+    box-shadow: none; /* No shadow */
+}
+
+h1 {
+    color: var(--header-text);
+    margin: 0;
+    font-size: 2.5em;
+    text-shadow: none; /* No text shadow */
+}
+
+.subtitle { /* New style for the subtitle */
+    color: var(--header-text);
+    font-size: 0.9em;
+    margin-top: 5px;
+    margin-bottom: 0;
+    opacity: 0.8; /* Slightly transparent */
+}
+
+main {
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--main-bg);
+    border-radius: 0; /* No border radius */
+    box-shadow: none; /* No box shadow */
+    border: 1px solid var(--border-color); /* Simple border */
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: var(--text-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: left; /* Aligned left */
+}
+
+h3 {
+    color: var(--text-color);
+    margin-top: 20px;
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 1.2em;
+}
+
+form {
+    display: flex; /* Keep flex for vertical alignment of inputs */
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 0; /* No border radius */
+    background-color: var(--form-bg);
+}
+
+input[type="file"],
+input[type="url"],
+input[type="text"] { /* Added input[type="text"] for username */
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px; /* Slightly less padding */
+    border-radius: 0; /* No border radius */
+}
+
+input[type="file"]::file-selector-button {
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 6px 10px; /* Adjusted padding */
+    border-radius: 0; /* No border radius */
+    cursor: pointer;
+    margin-right: 8px; /* Adjusted margin */
+    transition: background-color 0.2s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+textarea {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px; /* Slightly less padding */
+    border-radius: 0; /* No border radius */
+    resize: vertical;
+}
+
+button[type="submit"] {
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 10px 15px; /* Adjusted padding */
+    border-radius: 0; /* No border radius */
+    cursor: pointer;
+    font-size: 1em; /* Adjusted font size */
+    transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--button-hover-bg);
+}
+
+#posts-container {
+    display: block; /* Stack posts vertically */
+    padding: 0; /* Remove padding */
+    border: none; /* No border here, main has border */
+    background-color: transparent; /* No background */
+}
+
+.post {
+    background-color: var(--post-bg);
+    border: 1px solid var(--post-border);
+    border-radius: 0; /* No border radius */
+    padding: 10px 15px; /* Adjusted padding */
+    box-shadow: none; /* No box shadow */
+    margin-bottom: 10px; /* Spacing between posts */
+    display: block; /* Ensure it takes full width */
+    position: relative;
+}
+
+.post:last-child {
+    margin-bottom: 0; /* No margin on the last post */
+}
+
+.post video, .post img {
+    width: 100%;
+    max-height: 250px;
+    background-color: black;
+    border-radius: 0; /* No border radius */
+    object-fit: contain; /* Ensure video/image fits within bounds */
+    margin-bottom: 10px;
+    display: block; /* Prevents extra space under media */
+}
+
+.post p {
+    margin: 0 0 10px 0;
+    color: var(--text-color);
+    font-size: 0.95em;
+}
+
+.post .post-username { /* New style for username */
+    font-weight: bold;
+    color: var(--border-color); /* Strong red for username */
+    margin-right: 5px; /* Small space after username */
+}
+
+.post .timestamp {
+    font-size: 0.8em;
+    color: var(--timestamp-color);
+    text-align: right;
+    margin-top: 0; /* Remove auto margin */
+}
+
+.post .delete-button {
+    background-color: var(--delete-button-bg);
+    color: white;
+    border: none;
+    padding: 3px 8px; /* Smaller padding */
+    border-radius: 0; /* No border radius */
+    cursor: pointer;
+    font-size: 0.7em; /* Smaller font size */
+    position: absolute; /* Position relative to .post */
+    top: 5px; /* Closer to top corner */
+    right: 5px; /* Closer to right corner */
+    transition: background-color 0.2s ease;
+    opacity: 1; /* Fully visible */
+}
+
+.post .delete-button:hover {
+    background-color: var(--button-hover-bg);
+    opacity: 1;
+}
+
+/* New: Reply button styling */
+.post .reply-button {
+    background-color: #555; /* Darker grey for reply button */
+    color: white;
+    border: none;
+    padding: 3px 8px;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 0.7em;
+    position: absolute;
+    top: 5px;
+    right: 40px; /* Position next to delete button */
+    transition: background-color 0.2s ease;
+}
+
+.post .reply-button:hover {
+    background-color: #333; /* Even darker grey on hover */
+}
+
+/* New: Styles for nested replies */
+.replies-container {
+    padding-left: 15px; /* Indent replies */
+    border-left: 1px dashed var(--post-border); /* Visual thread line */
+    margin-top: 10px; /* Space between parent content and first reply */
+}
+
+.reply-post {
+    background-color: #FDFDF5; /* Slightly lighter background for replies */
+    border: 1px solid #E5E5E0; /* Lighter border for replies */
+    margin-top: 10px; /* Space between replies in a thread */
+    margin-bottom: 0; /* No bottom margin, container handles spacing */
+    box-shadow: none;
+}
+
+/* New: Reply form container and styling */
+.reply-form-container {
+    margin-top: 10px;
+    border-top: 1px solid var(--post-border);
+    padding-top: 10px;
+}
+
+.reply-post-form {
+    padding: 10px; /* Smaller padding for reply form */
+    gap: 10px; /* Smaller gap for reply form inputs */
+    background-color: #F8F8F8; /* Slightly different background */
+    border: 1px solid #D0D0D0; /* Lighter border */
+}
+
+.reply-post-form input,
+.reply-post-form textarea {
+    padding: 6px;
+    font-size: 0.9em;
+}
+
+.reply-post-form button[type="submit"] {
+    padding: 8px 12px;
+    font-size: 0.9em;
+}
+
+/* New styles for Normal Boards hierarchy */
+#normal-boards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* Control spacing via margins on individual board types */
+    margin-bottom: 30px;
+}
+
+.normal-board { /* Specific styles for top-level boards */
+    background-color: var(--form-bg);
+    border: 1px solid var(--border-color);
+    padding: 10px 15px;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-bottom: 10px; /* Space after each main board (before next one or its sub-boards) */
+}
+
+.normal-board:hover {
+    background-color: var(--post-border);
+}
+
+.normal-board .board-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.normal-board .board-title {
+    font-weight: bold;
+    color: var(--border-color); /* Strong red for board names */
+    font-size: 1.1em;
+}
+
+.normal-board .board-topic {
+    font-size: 0.9em;
+    color: var(--timestamp-color); /* Lighter color for topic */
+    margin-top: 2px;
+}
+
+.sub-boards-list { /* Container for sub-boards */
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px; /* Indent sub-board list */
+    margin-top: -5px; /* Pull up slightly to reduce gap from parent main board */
+    margin-bottom: 10px; /* Space after the group of sub-boards */
+    border-left: 1px dashed var(--post-border); /* Visual indicator of nesting */
+    padding-left: 10px;
+}
+
+.sub-board { /* Specific styles for sub-boards */
+    background-color: #FDFDF5; /* Slightly lighter than main board bg */
+    border: 1px solid #D0D0C0; /* Lighter border for sub-boards */
+    border-left: none; /* No left border on individual sub-boards to align with dashed line */
+    border-top: none; /* No top border, they will share a horizontal line visual if stacked */
+    font-size: 0.9em; /* Smaller font size */
+    padding: 8px 15px; /* Adjust padding for sub-boards */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-bottom: 0px; /* No margin between sub-boards, handled by shared border */
+}
+
+.sub-board:first-child {
+    border-top: 1px solid #D0D0C0; /* First sub-board gets a top border */
+}
+
+.sub-board:hover {
+    background-color: #ECECE0; /* Lighter hover effect for sub-boards */
+}
+
+.sub-board .board-title {
+    color: #800000; /* Darker red for sub-board names */
+    font-size: 1em; /* Adjust font size relative to parent */
+}
+
+.sub-board .board-topic {
+    font-size: 0.8em; /* Even smaller topic for sub-boards */
+}
+
+/* Styles for a selected normal board view */
+#selected-normal-board-view {
+    width: 100%; /* Take full width of main */
+}
+
+.board-header-controls {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.board-header-controls #back-to-board-list-button {
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    margin-right: 20px; /* Space between button and title */
+}
+
+.board-header-controls #back-to-board-list-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.board-header-controls h2 {
+    flex-grow: 1; /* Allows title to take up remaining space */
+    margin-bottom: 0; /* Adjust margin as it's within flex */
+    border-bottom: none; /* No border here, section below has it */
+    padding-bottom: 0;
+}
+
+/* New styles for Video Call Boards */
+#call-boards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.call-board {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--call-board-bg);
+    border: 1px solid var(--call-border);
+    padding: 10px 15px;
+    border-radius: 0;
+}
+
+.call-board .board-title {
+    font-weight: bold;
+    color: var(--border-color); /* Use a strong red for the board names */
+    font-size: 1.1em;
+}
+
+.join-call-button {
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+}
+
+.join-call-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Video Call Interface Overlay */
+.hidden {
+    display: none !important;
+}
+
+#call-interface-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Dark overlay */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+    color: white;
+}
+
+.call-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 20px;
+}
+
+#current-call-board-name {
+    color: var(--header-text);
+    margin: 0;
+    font-size: 2em;
+}
+
+#leave-call-button {
+    background-color: var(--delete-button-bg);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+}
+
+#leave-call-button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.video-streams {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.video-stream-container {
+    flex: 1;
+    min-width: 300px; /* Minimum width for each video container */
+    max-width: 450px; /* Max width to fit two side-by-side */
+    background-color: #000; /* Black background for videos */
+    border: 2px solid var(--border-color);
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video-stream-container h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--header-text); /* Light red for stream titles */
+    font-size: 1.2em;
+}
+
+#local-video, #remote-video {
+    width: 100%;
+    height: 250px;
+    background-color: #000;
+    object-fit: contain;
+    border: 1px solid var(--post-border); /* Subtle border for video elements */
+}
+
+.signaling-message, .call-info-message {
+    font-size: 0.9em;
+    color: #CCC; /* Lighter grey for informational text */
+    margin-top: 15px;
+    text-align: center;
+    max-width: 800px;
+}
+
+/* New styles for link status in posts */
+.post .post-link {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.post .post-link a {
+    color: #0000FF; /* Blue for links */
+    text-decoration: underline;
+}
+
+.link-status-indicator {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.link-status-pending {
+    background-color: #FFA500; /* Orange */
+    color: white;
+}
+.link-status-safe {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+.link-status-malware {
+    background-color: #FF0000; /* Red */
+    color: white;
+}
+.link-status-porn {
+    background-color: #800080; /* Purple */
+    color: white;
+}
+.link-status-error {
+    background-color: #555555; /* Dark grey */
+    color: white;
+}
+
+/* New styles for app-info-footer */
+.app-info-footer {
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 15px 20px;
+    background-color: var(--form-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 0.85em;
+    text-align: center;
+    border-radius: 0;
+}
+
+.app-info-footer p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.app-info-footer code {
+    background-color: #EEE;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    main {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .video-streams {
+        flex-direction: column; /* Stack videos vertically on small screens */
+        align-items: center;
+    }
+
+    .video-stream-container {
+        min-width: unset; /* Remove min-width for mobile */
+        width: 100%; /* Take full width on mobile */
+        max-width: 400px; /* Limit max width for a cleaner look on mobile */
+    }
+
+    #current-call-board-name {
+        font-size: 1.5em;
+    }
+
+    #leave-call-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .board-header-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .board-header-controls #back-to-board-list-button {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    /* Adjust reply button for mobile */
+    .post .reply-button {
+        position: static; /* Let it flow normally */
+        margin-top: 5px; /* Add some space */
+        width: fit-content;
+        float: right; /* Align right within the post */
+    }
+}
+
+/* New: Mobile UI variant based on JS device detection */
+/* These styles will apply when `body.is-mobile` class is present,
+   potentially overriding or augmenting the media query specific styles for a distinct mobile UI. */
+body.is-mobile {
+    header {
+        padding: 8px 15px; /* Slightly less header padding */
+    }
+
+    h1 {
+        font-size: 2em; /* Smaller main title */
+    }
+
+    .subtitle {
+        font-size: 0.8em; /* Smaller subtitle */
+    }
+
+    main {
+        width: 98%; /* Take even more width on mobile */
+        margin: 10px auto; /* Less vertical margin */
+        padding: 10px; /* Less padding inside main */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Smaller section titles */
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+    }
+
+    h3 {
+        font-size: 1.1em; /* Smaller sub-section titles */
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    form {
+        padding: 10px; /* Less padding in form */
+        gap: 10px; /* Less gap between form elements */
+    }
+
+    input[type="file"],
+    input[type="url"],
+    input[type="text"], /* Added for mobile input styling */
+    textarea {
+        padding: 10px; /* Larger input padding for easier touch */
+        font-size: 1em;
+    }
+
+    input[type="file"]::file-selector-button {
+        padding: 8px 12px; /* Larger file selector button */
+        font-size: 0.9em;
+    }
+
+    button[type="submit"],
+    .join-call-button,
+    .board-header-controls #back-to-board-list-button,
+    #leave-call-button {
+        padding: 10px 15px; /* Larger buttons for touch */
+        font-size: 1em;
+    }
+
+    .post {
+        padding: 8px 12px; /* Less padding for posts */
+        margin-bottom: 8px; /* Less margin between posts */
+    }
+
+    .post p {
+        font-size: 0.9em; /* Slightly smaller post text for density */
+        margin: 0 0 8px 0;
+    }
+
+    .post video, .post img {
+        max-height: 200px; /* Smaller max height for media */
+        margin-bottom: 8px;
+    }
+
+    .app-info-footer {
+        width: 98%;
+        margin: 10px auto;
+        padding: 10px 15px;
+        font-size: 0.8em;
+    }
+
+    .signaling-message, .call-info-message {
+        font-size: 0.8em;
+    }
+
+    /* Mobile specific reply post adjustments */
+    .replies-container {
+        padding-left: 10px; /* Slightly less indentation on mobile */
+    }
+
+    .reply-post-form {
+        padding: 8px;
+        gap: 8px;
+    }
+}
